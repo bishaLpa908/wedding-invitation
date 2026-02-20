@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+
+<title>Haldi Invitation</title>
+
+<style>
+
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#f6f2ea;
+    font-family:'Playfair Display', serif;
+}
+
+/* CARD */
+.card{
+    width:420px;
+    height:720px;
+    background:url("haldi.png") center/cover no-repeat;
+    border-radius:18px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.25);
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    text-align:center;
+    padding-top:320px;   /* moved text slightly down */
+}
+
+/* TEXT BOX */
+.text-box{
+    width:80%;
+    color:#6b4c1e;
+    line-height:1;       /* removes extra vertical spacing */
+}
+
+/* ANIMATION BASE */
+.line{
+    opacity:0;
+    transform:translateY(25px);
+    margin:3px 0;        /* 🔥 very small gap between lines */
+}
+
+/* TEXT STYLES */
+.small{
+    font-family:'Cinzel', serif;
+    letter-spacing:2px;
+    font-size:14px;
+}
+
+.big{
+    font-family:'Cinzel', serif;
+    font-size:32px;
+    margin-bottom:4px;
+}
+
+.names{
+    font-size:27px;
+    font-weight:600;
+    margin-bottom:6px;
+}
+
+.details{
+    font-family:'Cinzel', serif;
+    font-size:15px;
+    letter-spacing:1px;
+    margin-top:4px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <div class="text-box" id="box"></div>
+</div>
+
+<script>
+
+const lines = [
+  {text:"Haldi Ceremony", class:"big"},
+  {text:"OF", class:"small"},
+  {text:"Chiranjit & Jaba", class:"names"},
+  {text:"March 7, 2026 | 3:00 PM", class:"details"},
+  {text:"AT THE RESIDENCE", class:"details"}
+];
+
+let i = 0;
+
+function showLine(){
+    if(i >= lines.length) return;
+
+    const div = document.createElement("div");
+    div.className = "line " + lines[i].class;
+    div.innerText = lines[i].text;
+    document.getElementById("box").appendChild(div);
+
+    setTimeout(()=>{
+        div.style.transition="1.6s ease";   // slower smooth animation
+        div.style.opacity=1;
+        div.style.transform="translateY(0)";
+    },200);
+
+    i++;
+    setTimeout(showLine, 2000);  // 🔥 slower delay between lines
+}
+/* Auto move to Page 5 */
+setTimeout(()=>{
+    document.body.style.transition="opacity 1.5s ease";
+    document.body.style.opacity="0";
+    setTimeout(()=>{
+        window.location.href="index3.html";
+    },1500);
+},18000);
+
+
+showLine();
+
+</script>
+
+</body>
+</html>

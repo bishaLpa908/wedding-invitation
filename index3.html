@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Wedding Invitation</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    margin:0;
+    background:#efeae2;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:'Playfair Display', serif;
+}
+
+/* Invitation Card */
+.card{
+    width:420px;
+    height:700px;
+    background:url("bg-wedding.png") center/cover no-repeat;
+    border-radius:14px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.25);
+    position:relative;
+    padding:60px 30px;
+    box-sizing:border-box;
+    overflow:hidden;
+}
+
+/* Heading font */
+h1{
+    font-family:'Great Vibes', cursive;
+    color:#7a5c2e;
+    text-align:center;
+    font-size:42px;
+    margin:0;
+}
+
+/* Names */
+.names{
+    text-align:center;
+    font-size:28px;
+    margin-top:8px;
+    color:#6a4e25;
+    font-weight:600;
+}
+
+/* Invitation text */
+.text{
+    margin-top:30px;
+    text-align:center;
+    color:#5a4b35;
+    font-size:16px;
+    line-height:1.8;
+}
+
+/* lines animation */
+.line{
+    opacity:0;
+    transform:translateY(20px);
+    transition:1s ease;
+}
+
+.line.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* 3D sticker */
+.sticker{
+    position:absolute;
+    bottom:-75px;
+    left:50%;
+    transform:translateX(-50%);
+    width:400px;
+    animation:float 6s ease-in-out infinite;
+    filter:drop-shadow(0 20px 15px rgba(0,0,0,0.25));
+}
+
+@keyframes float{
+    0%,100%{ transform:translateX(-50%) translateY(0); }
+    50%{ transform:translateX(-50%) translateY(-15px); }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <h1>Wedding Invitation</h1>
+    <div class="names">Chiranjit & Jaba</div>
+
+    <div class="text" id="text"></div>
+
+    <img src="sticker.png" class="sticker">
+
+</div>
+
+<script>
+
+const lines = [
+"Together with their families,",
+"request the pleasure of your gracious presence",
+"to celebrate the sacred union of",
+"",
+"on the auspicious occasion of their Wedding Ceremony",
+"to be held on Monday, 9th March 2026.",
+"",
+"We seek your blessings and love as they begin",
+"their beautiful journey of togetherness."
+];
+
+const container = document.getElementById("text");
+
+let i=0;
+function showLines(){
+    if(i < lines.length){
+        const p=document.createElement("div");
+        p.className="line";
+        p.innerHTML=lines[i];
+        container.appendChild(p);
+
+        setTimeout(()=>p.classList.add("show"),100);
+        i++;
+        setTimeout(showLines,1500); // line speed
+    }
+}
+
+showLines();
+/* Auto move to Page 4 */
+setTimeout(()=>{
+    document.body.style.transition="opacity 1.5s ease";
+    document.body.style.opacity="0";
+    setTimeout(()=>{
+        window.location.href="index2.html";
+    },1500);
+},16000);
+
+
+</script>
+
+</body>
+</html>
